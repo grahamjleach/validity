@@ -44,7 +44,7 @@ func Check(values ...interface{}) error {
 
 		if valueKind == reflect.Slice || valueKind == reflect.Array {
 			for i := 0; i < value.Len(); i++ {
-				if err := Validate(value.Index(i).Interface()); err != nil {
+				if err := Check(value.Index(i).Interface()); err != nil {
 					return err
 				}
 			}
@@ -57,7 +57,7 @@ func Check(values ...interface{}) error {
 					continue
 				}
 
-				if err := Validate(value.FieldByIndex([]int{i}).Interface()); err != nil {
+				if err := Check(value.FieldByIndex([]int{i}).Interface()); err != nil {
 					return err
 				}
 			}
